@@ -5,38 +5,38 @@ const elements = {
     navElement: document.getElementsByTagName('nav')[0]
 };
 
-const fadeIn = el => {
+const fadeIn = (el, duration) => {
     el.style.opacity = 0;
 
     var last = +new Date();
     var tick = function() {
-        el.style.opacity = +el.style.opacity + (new Date() - last) / 300;
+        el.style.opacity = +el.style.opacity + (new Date() - last) / duration;
         last = +new Date();
 
         if (+el.style.opacity < 1) {
             (window.requestAnimationFrame && requestAnimationFrame(tick)) ||
-                setTimeout(tick, 16);
+                setTimeout(tick, 10);
         }
     };
 
     tick();
 };
 
-const fadeOut = el => {
-    el.style.opacity = 1;
-
-    var last = +new Date();
-    var tick = function() {
-        el.style.opacity = +el.style.opacity - (new Date() - last) / 300;
-        last = +new Date();
-
-        if (+el.style.opacity > 0) {
-            (window.requestAnimationFrame && requestAnimationFrame(tick)) ||
-                setTimeout(tick, 16);
-        }
-    };
-
-    tick();
+const fadeOut = (el, duration) => {
+    return new Promise((resolve, reject) => {
+        el.style.opacity = 1;
+        var last = +new Date();
+        var tick = function() {
+            el.style.opacity = +el.style.opacity - (new Date() - last) / duration;
+            last = +new Date();
+    
+            if (+el.style.opacity > 0) {
+                (window.requestAnimationFrame && requestAnimationFrame(tick)) ||
+                    setTimeout(tick, 10);
+            } else resolve();
+        };
+        tick();
+    });
 };
 
 const waypoint = new Waypoint({
@@ -44,10 +44,9 @@ const waypoint = new Waypoint({
     handler: function(direction) {
         if (direction === 'down') {
             elements.navElement.classList.add('sticky');
-            fadeIn(elements.navElement);
+            fadeIn(elements.navElement, 200);
         } else {
-            fadeOut(elements.navElement);
-            setTimeout(() => elements.navElement.classList.remove('sticky'), 310);
+            fadeOut(elements.navElement, 200).then(() => elements.navElement.classList.remove('sticky'));
         }
     },
     offset: 80
