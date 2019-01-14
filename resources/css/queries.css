@@ -104,6 +104,21 @@
         display: none;
     }
 
+    .sticky .main-nav {
+        float: none;
+        margin: 0;
+        padding: 15px;
+        text-align: center;
+    }
+
+    .sticky .main-nav li {
+        margin-left: 15px;
+    }
+
+    .sticky .logo, .sticky .logo-black {
+        display: none;
+    }
+
     .long-copy {
         width: 100%;
         margin: 0;
