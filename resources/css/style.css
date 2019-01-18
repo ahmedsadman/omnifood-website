@@ -21,6 +21,7 @@ html, body {
     font-weight: 300;
     text-rendering: optimizeLegibility;
     overflow-x: hidden;
+    scroll-behavior: smooth;
 }
 
 .clearfix { 
@@ -245,7 +246,7 @@ header {
     left: 0;
     width: 100%;
     background-color: rgba(255, 255, 255, 0.98);
-    box-shadow: 0 2px 2px #c2c0c0;
+    box-shadow: 0 2px 2px #e7e7e7;
     z-index: 10000;
     opacity: 0;
 }

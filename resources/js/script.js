@@ -1,3 +1,4 @@
+/* --------------- Elements selection ----------------- */
 const elements = {
     featuresSectionElement: document.getElementsByClassName(
         'section-features'
@@ -5,6 +6,7 @@ const elements = {
     navElement: document.getElementsByTagName('nav')[0]
 };
 
+/* ---------------- Animation functions ------------------- */
 const fadeIn = (el, duration) => {
     el.style.opacity = 0;
 
@@ -27,9 +29,10 @@ const fadeOut = (el, duration) => {
         el.style.opacity = 1;
         var last = +new Date();
         var tick = function() {
-            el.style.opacity = +el.style.opacity - (new Date() - last) / duration;
+            el.style.opacity =
+                +el.style.opacity - (new Date() - last) / duration;
             last = +new Date();
-    
+
             if (+el.style.opacity > 0) {
                 (window.requestAnimationFrame && requestAnimationFrame(tick)) ||
                     setTimeout(tick, 10);
@@ -39,6 +42,7 @@ const fadeOut = (el, duration) => {
     });
 };
 
+// Hide/Show sticky footer
 const waypoint = new Waypoint({
     element: elements.featuresSectionElement,
     handler: function(direction) {
@@ -46,7 +50,9 @@ const waypoint = new Waypoint({
             elements.navElement.classList.add('sticky');
             fadeIn(elements.navElement, 200);
         } else {
-            fadeOut(elements.navElement, 200).then(() => elements.navElement.classList.remove('sticky'));
+            fadeOut(elements.navElement, 200).then(() =>
+                elements.navElement.classList.remove('sticky')
+            );
         }
     },
     offset: 80
