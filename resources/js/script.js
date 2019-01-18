@@ -50,9 +50,10 @@ const waypoint = new Waypoint({
             elements.navElement.classList.add('sticky');
             fadeIn(elements.navElement, 200);
         } else {
-            fadeOut(elements.navElement, 200).then(() =>
-                elements.navElement.classList.remove('sticky')
-            );
+            fadeOut(elements.navElement, 200).then(() => {
+                elements.navElement.classList.remove('sticky');
+                elements.navElement.style.opacity = 1.0;
+            });
         }
     },
     offset: 80
