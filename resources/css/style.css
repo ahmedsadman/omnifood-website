@@ -277,6 +277,10 @@ header {
     margin-bottom: 30px;
 }
 
+.section-features, .section-cities, .section-plans, .section-steps {
+    min-height: 100vh;
+}
+
 /* ---------------------------------------------------- */
 /* Meals */
 /* ---------------------------------------------------- */
