@@ -3,7 +3,8 @@ const elements = {
     featuresSectionElement: document.getElementsByClassName(
         'section-features'
     )[0],
-    navElement: document.getElementsByTagName('nav')[0]
+    navElement: document.getElementsByTagName('nav')[0],
+    mainNav: document.getElementsByClassName('main-nav')[0]
 };
 
 /* ---------------- Animation functions ------------------- */
@@ -23,20 +24,6 @@ const fadeIn = (el, duration) => {
 
     tick();
 };
-
-// get scroll direction
-let scrollDirection;
-let lastScrollTop = 0;
-window.addEventListener('scroll', () => {
-    const st = window.pageYOffset || document.documentElement.scrollTop;
-    if (st > lastScrollTop){
-       scrollDirection = 'down';
-    } else {
-       scrollDirection = 'up'
-    }
-    lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
-    console.log(scrollDirection);
-});
 
 const fadeOut = (el, duration) => {
     return new Promise((resolve, reject) => {
@@ -69,29 +56,27 @@ const toggleStickyDefault = new Waypoint({
                 elements.navElement.style.opacity = 1.0;
             });
         }
-
-        if (direction === 'up' && document.documentElement.clientWidth <= 520) {
-            elements.navElement.classList.remove('sticky');
-            elements.navElement.style.opacity = 1.0;
-        }
     },
     offset: 80
 });
 
-// disable the default sticky nav trigger on waypoint
-console.log(document.documentElement.clientWidth);
-if (document.documentElement.clientWidth <= 520) {
-    toggleStickyDefault.disable();
-}
 
-// hide show sticky footer based on scroll direction, for small screens
-window.addEventListener('scroll', () => {
-    if (document.documentElement.clientWidth <= 520) {
-        if (scrollDirection === 'down' || lastScrollTop <= 400) {
-            elements.navElement.classList.remove('sticky');
-            elements.navElement.style.opacity = 1.0; 
-        } else {
-            elements.navElement.classList.add('sticky');
-        }
+// open close drawer
+let open = false;
+const icon = document.querySelector('.nav-icon i');
+document.querySelector('.nav-icon').onclick = () => {
+    icon.classList.remove('ion-md-menu');
+    icon.classList.remove('ion-md-close');
+
+    if (open) {
+        // close it
+        elements.mainNav.style.display = 'none';
+        icon.classList.add('ion-md-menu');
+        open = false;
+    } else {
+        // open it
+        elements.mainNav.style.display = 'block';
+        icon.classList.add('ion-md-close');
+        open = true;
     }
-});
+}
