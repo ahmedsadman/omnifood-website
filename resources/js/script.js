@@ -85,8 +85,10 @@ document.querySelector('.nav-icon').onclick = toggleDrawer;
 
 // close drawer when an item is clicked
 document.querySelectorAll('.main-nav li a').forEach((element) => {
-    element.onclick = () => {
-        open = true; // when toggleDrawer recevies open is true, it will close it
-        toggleDrawer();
+    if (document.documentElement.clientWidth <= 480) {
+        element.onclick = () => {
+            open = true; // when toggleDrawer recevies open is true, it will close it
+            toggleDrawer();
+        }
     }
 });

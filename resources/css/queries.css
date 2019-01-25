@@ -192,7 +192,7 @@
 /* small phones: from 0 to 480px */
 @media only screen and (max-width: 480px) {
     section {
-        padding: 65px 0; /* Higher padding to avoid overlay of floating menu */
+        padding: 70px 0; /* Higher padding to avoid overlay of floating menu */
     }
 
     .contact-form {
