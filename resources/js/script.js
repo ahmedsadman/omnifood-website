@@ -60,11 +60,9 @@ const toggleStickyDefault = new Waypoint({
     offset: 80
 });
 
-
-// open close drawer
 let open = false;
-const icon = document.querySelector('.nav-icon i');
-document.querySelector('.nav-icon').onclick = () => {
+
+const toggleDrawer = () => {
     icon.classList.remove('ion-md-menu');
     icon.classList.remove('ion-md-close');
 
@@ -80,3 +78,15 @@ document.querySelector('.nav-icon').onclick = () => {
         open = true;
     }
 }
+
+// open close drawer based on icon click
+const icon = document.querySelector('.nav-icon i');
+document.querySelector('.nav-icon').onclick = toggleDrawer;
+
+// close drawer when an item is clicked
+document.querySelectorAll('.main-nav li a').forEach((element) => {
+    element.onclick = () => {
+        open = true; // when toggleDrawer recevies open is true, it will close it
+        toggleDrawer();
+    }
+});
